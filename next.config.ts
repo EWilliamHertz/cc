@@ -1,9 +1,6 @@
 import type { NextConfig } from "next";
 
-
-// new code
 const nextConfig: NextConfig = {
-  // Move this to the top level, NOT inside experimental
   allowedDevOrigins: ['3000-cs-553118797525-default.cs-europe-west4-pear.cloudshell.dev'],
   serverExternalPackages: ["@prisma/client", "prisma"],
   
@@ -18,9 +15,6 @@ const nextConfig: NextConfig = {
         hostname: "i.ibb.co",
       },
     ],
-  },
-  experimental: {
-    // Keep your other experimental flags here if needed
   },
 };
 

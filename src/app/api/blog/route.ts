@@ -10,7 +10,7 @@ export async function GET() {
       },
     });
     // Fallback sorting logic if customCreatedAt is null
-    const sorted = posts.sort((a, b) => {
+    const sorted = posts.sort((a: any, b: any) => {
       const dateA = a.customCreatedAt || a.createdAt;
       const dateB = b.customCreatedAt || b.createdAt;
       return new Date(dateB).getTime() - new Date(dateA).getTime();
