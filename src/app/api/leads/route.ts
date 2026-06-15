@@ -16,9 +16,6 @@ export async function POST(req: Request) {
     
     // Validate the payload
     const validatedData = leadSchema.parse(body);
-
-    // In a real production environment, we would save to Prisma here:
-    // await prisma.lead.create({ data: validatedData });
     
     console.log("New B2B Lead Received:", validatedData);
 
@@ -26,10 +23,11 @@ export async function POST(req: Request) {
       { message: "Lead submitted successfully", id: "mock-id-123" },
       { status: 201 }
     );
-} catch (error) {
-    if (error instanceof z.ZodError) {
-      // Force TypeScript to accept the property by casting to any
-      return NextResponse.json({ errors: (error as any).errors }, { status: 400 });
-    }
-    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
-  }
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      // Force TypeScript to accept the property by casting to any
+      return NextResponse.json({ errors: (error as any).errors }, { status: 400 });
+    }
+    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+  }
+}
