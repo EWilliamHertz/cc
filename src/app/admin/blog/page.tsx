@@ -13,6 +13,7 @@ interface BlogFormData {
   content: string;
   authorName: string;
   customCreatedAt?: string;
+  coverImage?: string;
 }
 
 interface BlogPost extends BlogFormData {
