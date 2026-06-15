@@ -26,10 +26,10 @@ export async function POST(req: Request) {
       { message: "Lead submitted successfully", id: "mock-id-123" },
       { status: 201 }
     );
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ errors: (error as z.ZodError<any>).errors }, { status: 400 });
-    }
-    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
-  }
-}
+} catch (error) {
+    if (error instanceof z.ZodError) {
+      // Force TypeScript to accept the property by casting to any
+      return NextResponse.json({ errors: (error as any).errors }, { status: 400 });
+    }
+    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+  }
