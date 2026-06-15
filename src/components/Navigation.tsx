@@ -29,7 +29,7 @@ const Navigation = () => {
                 CLIMATE<span className="text-green-600">CURTAINS</span>
               </span>
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] leading-none mt-1">
-                Global Patent
+                Patented
               </span>
             </div>
           </Link>
