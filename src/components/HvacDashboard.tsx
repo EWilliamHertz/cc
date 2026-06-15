@@ -26,12 +26,15 @@ const HvacDashboard = () => {
   ];
 
   // Logic calculation based on building insulation degradation
+  // Logic calculation based on building insulation degradation
   const metrics = useMemo(() => {
     let ageMultiplier = 1.0;
     if (buildingAge === "Pre-1980") ageMultiplier = 1.3; // Bad insulation
     if (buildingAge === "Post-2010") ageMultiplier = 0.7; // Good insulation
 
-    const peakWinterGainPercent = 18 * ageMultiplier; 
+    // Make facility size actively scale the thermal efficiency baseline
+    const sizeFactor = facilitySize / 50000;
+    const peakWinterGainPercent = 18 * ageMultiplier * (0.8 + (sizeFactor * 0.2)); 
     let totalAnnualSavings = 0;
 
     const chartData = monthlyCurve.map((data) => {
