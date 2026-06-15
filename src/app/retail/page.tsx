@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Building2, Factory, GraduationCap, BarChart3, Clock, Layers } from "lucide-react";
 import RetailLeadForm from "@/components/RetailLeadForm";
 import RoiCalculator from "@/components/RoiCalculator";
-
+import HvacDashboard from "@/components/HvacDashboard";
 const RetailPage = () => {
   return (
     <div className="bg-[#FDFDFD]">
@@ -36,11 +36,11 @@ const RetailPage = () => {
               
               <div className="grid grid-cols-2 gap-8">
                 <div className="border-l-4 border-green-600 pl-6">
-                  <p className="text-3xl font-bold text-gray-900">18mo</p>
+                  <p className="text-3xl font-bold text-green-600">18mo</p>
                   <p className="text-sm text-gray-500 font-medium">Avg. Payback Period</p>
                 </div>
                 <div className="border-l-4 border-blue-600 pl-6">
-                  <p className="text-3xl font-bold text-gray-900">30%</p>
+                  <p className="text-3xl font-bold text-green-600">30%</p>
                   <p className="text-sm text-gray-500 font-medium">HVAC Load Reduction</p>
                 </div>
               </div>
@@ -129,12 +129,13 @@ const RetailPage = () => {
                      </div>
                    ))}
                  </div>
-                 <p className="text-center mt-6 text-sm text-gray-500 font-bold uppercase tracking-widest">HVAC Efficiency Gains per Month</p>
                </div>
+               
             </div>
           </div>
-        </div>
+        </div>  
       </section>
+      <HvacDashboard />
     </div>
   );
 };

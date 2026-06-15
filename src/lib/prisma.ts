@@ -1,17 +1,27 @@
 // new code
+// new code
 import { PrismaClient } from "@prisma/client";
 
-const prismaClientSingleton = () => {
-  return new PrismaClient({
-    // Passing an object circumvents the Initialization Error in Turbopack
-    log: ['error', 'warn'],
-  });
-};
 
-declare const globalThis: {
-  prismaGlobal: ReturnType<typeof prismaClientSingleton>;
-} & typeof global;
 
-export const prisma = globalThis.prismaGlobal ?? prismaClientSingleton();
 
-if (process.env.NODE_ENV !== "production") globalThis.prismaGlobal = prisma;
+// Reverting to the simplest instantiation. Next.js Turbopack has a known bug 
+// where passing an options object accidentally triggers the Edge runtime validation.
+const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
+
+
+
+
+// new code
+export const prisma = globalForPrisma.prisma || new PrismaClient({
+  datasources: {
+    db: {
+      url: process.env.DATABASE_URL
+    }
+  }
+});
+
+
+
+
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
