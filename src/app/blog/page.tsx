@@ -14,6 +14,7 @@ interface BlogPost {
   coverImage: string;
   authorName: string;
   createdAt: string;
+  customCreatedAt?: string;
 }
 
 const BlogPage = () => {
@@ -76,11 +77,13 @@ const BlogPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="group cursor-pointer"
               >
-                <div className="relative aspect-[16/10] rounded-[2.5rem] overflow-hidden mb-6 shadow-sm group-hover:shadow-xl transition-all">
+                
+           <div className="relative aspect-[16/10] rounded-[2.5rem] overflow-hidden mb-6 shadow-sm group-hover:shadow-xl transition-all">
                   <Image
                     src={post.coverImage || "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80"}
                     alt={post.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -88,7 +91,7 @@ const BlogPage = () => {
                   <div className="flex items-center gap-4 text-xs font-bold text-gray-400 uppercase tracking-widest">
                     <span className="flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5" />
-                      {new Date(post.createdAt).toLocaleDateString()}
+                      {new Date(post.customCreatedAt || post.createdAt).toLocaleDateString()}
                     </span>
                     <span className="flex items-center gap-1.5">
                       <User className="w-3.5 h-3.5" />

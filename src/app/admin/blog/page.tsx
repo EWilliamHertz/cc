@@ -28,7 +28,7 @@ const BlogManager = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
 
-  const { register, handleSubmit, reset, setValue } = useForm<BlogFormData>();
+  const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm<BlogFormData>();
 
   useEffect(() => {
     let mounted = true;
@@ -89,19 +89,31 @@ const BlogManager = () => {
       });
 
       if (response.ok) {
-        setIsSuccess(true);
-        reset();
-        setCoverImage(null);
-        setEditingPost(null);
-        fetchPosts();
-        setTimeout(() => setIsSuccess(false), 3000);
-      }
-    } catch (error) {
-      console.error("Failed to save post", error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+        setIsSuccess(true);
+        reset();
+        setCoverImage(null);
+        setEditingPost(null);
+        fetchPosts();
+        setTimeout(() => setIsSuccess(false), 3000);
+      } else {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await response.json();
+          alert(`Failed to save post: ${errorData.error || 'Internal Server Error'}`);
+        } else {
+          // If Next.js returns an HTML compilation error page, catch it here
+          const errorText = await response.text();
+          console.error("Server returned non-JSON error:", errorText);
+          alert("Server compilation error. Check your Next.js terminal for details.");
+        }
+      }
+    } catch (error) {
+      console.error("Failed to save post", error);
+      alert("A network error occurred while communicating with the server.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const startEdit = (post: BlogPost) => {
     setEditingPost(post);
@@ -138,11 +150,15 @@ const BlogManager = () => {
             </h1>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              
               <div className="space-y-2">
-                <label className="text-xs font-bold text-gray-400 uppercase tracking-widest px-1">Article Title</label>
+                <label className="text-xs font-bold text-gray-400 uppercase tracking-widest px-1 flex justify-between">
+                  <span>Article Title</span>
+                  {errors.title && <span className="text-red-500 lowercase">*Required</span>}
+                </label>
                 <input
                   {...register("title", { required: true })}
-                  className="w-full px-6 py-4 rounded-2xl bg-gray-50 border border-gray-100 focus:border-green-600 outline-none transition-all"
+                  className={`w-full px-6 py-4 rounded-2xl bg-gray-50 border ${errors.title ? 'border-red-400' : 'border-gray-100'} focus:border-green-600 outline-none transition-all`}
                 />
               </div>
 
@@ -164,8 +180,9 @@ const BlogManager = () => {
                              <Loader2 className="w-5 h-5 animate-spin text-green-600" />
                           ) : coverImage ? (
                              <div className="flex items-center gap-3 w-full">
+                                
                                 <div className="relative w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 border border-gray-200">
-                                   <Image src={coverImage} alt="Preview" fill className="object-cover" />
+                                   <img src={coverImage} alt="Preview" className="w-full h-full object-cover" />
                                 </div>
                                 <span className="text-xs font-bold text-green-600 truncate">Image Ready</span>
                              </div>
@@ -180,21 +197,28 @@ const BlogManager = () => {
                  </div>
               </div>
 
+              
               <div className="space-y-2">
-                <label className="text-xs font-bold text-gray-400 uppercase tracking-widest px-1">Short Excerpt (SEO)</label>
+                <label className="text-xs font-bold text-gray-400 uppercase tracking-widest px-1 flex justify-between">
+                  <span>Short Excerpt (SEO)</span>
+                  {errors.excerpt && <span className="text-red-500 lowercase">*Required</span>}
+                </label>
                 <textarea
                   {...register("excerpt", { required: true })}
                   rows={2}
-                  className="w-full px-6 py-4 rounded-2xl bg-gray-50 border border-gray-100 focus:border-green-600 outline-none transition-all resize-none"
+                  className={`w-full px-6 py-4 rounded-2xl bg-gray-50 border ${errors.excerpt ? 'border-red-400' : 'border-gray-100'} focus:border-green-600 outline-none transition-all resize-none`}
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-gray-400 uppercase tracking-widest px-1">Article Content</label>
+                <label className="text-xs font-bold text-gray-400 uppercase tracking-widest px-1 flex justify-between">
+                  <span>Article Content</span>
+                  {errors.content && <span className="text-red-500 lowercase">*Required</span>}
+                </label>
                 <textarea
                   {...register("content", { required: true })}
                   rows={8}
-                  className="w-full px-6 py-4 rounded-2xl bg-gray-50 border border-gray-100 focus:border-green-600 outline-none transition-all resize-none"
+                  className={`w-full px-6 py-4 rounded-2xl bg-gray-50 border ${errors.content ? 'border-red-400' : 'border-gray-100'} focus:border-green-600 outline-none transition-all resize-none`}
                 />
               </div>
 

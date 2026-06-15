@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Building2, Factory, GraduationCap, BarChart3, Clock, Layers } from "lucide-react";
 import RetailLeadForm from "@/components/RetailLeadForm";
+import RoiCalculator from "@/components/RoiCalculator";
 
 const RetailPage = () => {
   return (
@@ -85,7 +86,15 @@ const RetailPage = () => {
           </div>
         </div>
       </section>
-
+<section className="py-24 px-4 bg-[#FDFDFD]">
+  <div className="max-w-7xl mx-auto">
+    <div className="text-center mb-16">
+      <h2 className="text-4xl font-bold text-gray-900 mb-4">See Your Savings</h2>
+      <p className="text-gray-600 max-w-2xl mx-auto">Use our interactive calculator to project your annual savings and implementation ROI.</p>
+    </div>
+    <RoiCalculator />
+  </div>
+</section>
       {/* Case Study Mock */}
       <section className="py-24 bg-gray-900 text-white overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 relative">
