@@ -101,7 +101,7 @@ const EnergyCalculator = () => {
               </div>
               <div>
                 <p className="text-sm text-gray-400 uppercase tracking-widest font-bold">Financial Savings</p>
-                <p className="text-4xl font-bold">€{annualSavings.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+                <p className="text-4xl font-bold">€{annualSavings.toLocaleString('en-US', { maximumFractionDigits: 0 })}</p>
               </div>
             </motion.div>
 
@@ -111,7 +111,7 @@ const EnergyCalculator = () => {
               </div>
               <div>
                 <p className="text-sm text-gray-400 uppercase tracking-widest font-bold">Energy Conserved</p>
-                <p className="text-4xl font-bold">{savingsKwh.toLocaleString(undefined, { maximumFractionDigits: 0 })} kWh</p>
+                <p className="text-4xl font-bold">{savingsKwh.toLocaleString('en-US', { maximumFractionDigits: 0 })} kWh</p>
               </div>
             </div>
 

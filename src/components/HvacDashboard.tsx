@@ -75,7 +75,7 @@ const HvacDashboard = () => {
           <div className="space-y-4">
             <label className="text-xs font-bold text-gray-400 uppercase tracking-widest flex justify-between">
               <span>Facility Size</span>
-              <span className="text-gray-900">{facilitySize.toLocaleString()} sq ft</span>
+              <span className="text-gray-900">{facilitySize.toLocaleString('en-US')} sq ft</span>
             </label>
             <input
               type="range" min="10000" max="100000" step="5000"
@@ -86,9 +86,10 @@ const HvacDashboard = () => {
           </div>
 
           <div className="space-y-4">
+            
             <label className="text-xs font-bold text-gray-400 uppercase tracking-widest flex justify-between">
               <span>Peak Winter Bill</span>
-              <span className="text-gray-900">${winterBill.toLocaleString()} /mo</span>
+              <span className="text-gray-900">${winterBill.toLocaleString('en-US')} /mo</span>
             </label>
             <input
               type="range" min="1000" max="20000" step="500"
@@ -118,14 +119,14 @@ const HvacDashboard = () => {
                    <Snowflake className="w-5 h-5 text-green-600" />
                    <span className="font-bold text-gray-700 text-sm">Peak Winter Savings</span>
                 </div>
-                <span className="font-bold text-green-700">${metrics.peakSavings.toLocaleString(undefined, {maximumFractionDigits: 0})} /mo</span>
+                <span className="font-bold text-green-700">${metrics.peakSavings.toLocaleString('en-US', {maximumFractionDigits: 0})} /mo</span>
              </div>
              <div className="bg-orange-50 rounded-2xl p-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                    <ThermometerSun className="w-5 h-5 text-orange-500" />
                    <span className="font-bold text-gray-700 text-sm">Average Monthly</span>
                 </div>
-                <span className="font-bold text-orange-700">${metrics.averageSavings.toLocaleString(undefined, {maximumFractionDigits: 0})} /mo</span>
+                <span className="font-bold text-orange-700">${metrics.averageSavings.toLocaleString('en-US', {maximumFractionDigits: 0})} /mo</span>
              </div>
           </div>
         </div>
@@ -136,7 +137,7 @@ const HvacDashboard = () => {
            <div className="flex justify-between items-end mb-6 border-b border-gray-100 pb-4">
               <div>
                  <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-1">Estimated Annual Return</p>
-                 <p className="text-4xl font-bold text-gray-900">${metrics.totalAnnualSavings.toLocaleString(undefined, {maximumFractionDigits: 0})}</p>
+                 <p className="text-4xl font-bold text-gray-900">${metrics.totalAnnualSavings.toLocaleString('en-US', {maximumFractionDigits: 0})}</p>
               </div>
               <div className="text-right">
                  <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-1">Max Efficiency Gain</p>
@@ -150,7 +151,7 @@ const HvacDashboard = () => {
                  <div key={data.month} className="w-full flex flex-col items-center group relative">
                     {/* Tooltip */}
                     <div className="absolute -top-10 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-900 text-white text-xs font-bold py-1 px-2 rounded-lg pointer-events-none whitespace-nowrap z-10">
-                       ${data.savings.toLocaleString(undefined, {maximumFractionDigits: 0})}
+                       ${data.savings.toLocaleString('en-US', {maximumFractionDigits: 0})}
                     </div>
                     {/* Bar */}
                     <div 

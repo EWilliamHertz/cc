@@ -101,10 +101,17 @@ const RetailPage = () => {
           <div className="flex flex-col md:flex-row gap-16 items-center">
             <div className="md:w-1/2">
               <BarChart3 className="w-16 h-16 text-green-500 mb-8" />
-              <h2 className="text-4xl font-bold mb-6">Technical Validation Report: Global HQ Alpha</h2>
-              <p className="text-gray-400 text-lg mb-8">
-                Implementation of Climate Curtains in a 12,000m² glass-facade office building resulted in a verified 22% reduction in total heating and cooling costs over a 12-month period.
-              </p>
+              
+              <div className="flex items-start justify-between gap-6 mb-8">
+                <div>
+                  <h2 className="text-4xl font-bold mb-6">Technical Validation Report: Global HQ Alpha</h2>
+                  <p className="text-gray-400 text-lg">
+                    Implementation of Climate Curtains in a 12,000m² glass-facade office building resulted in a verified 22% reduction in total heating and cooling costs over a 12-month period.
+                  </p>
+                </div>
+                
+                
+              </div>
               <ul className="space-y-4">
                 <li className="flex items-center gap-3">
                   <Clock className="w-5 h-5 text-green-500" />
@@ -116,21 +123,17 @@ const RetailPage = () => {
                 </li>
               </ul>
             </div>
-            <div className="md:w-1/2">
-               <div className="bg-white/5 p-8 rounded-[2rem] border border-white/10 backdrop-blur-xl">
-                 <div className="h-64 flex items-end gap-4">
-                   {[40, 70, 45, 90, 65, 80, 55].map((h, i) => (
-                     <div key={i} className="flex-grow bg-green-500/20 rounded-t-lg relative group">
-                       <motion.div 
-                        initial={{ height: 0 }}
-                        whileInView={{ height: `${h}%` }}
-                        className="bg-green-500 w-full rounded-t-lg absolute bottom-0"
-                       />
-                     </div>
-                   ))}
+          <div className="md:w-1/2 flex justify-center lg:justify-end">
+               <div className="relative w-full max-w-sm aspect-[4/5] rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl group">
+                 {/* Assuming the image you uploaded is named peter.png in the public folder */}
+                 <img src="/peter.png" alt="Peter - Executive Board" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                 
+                 {/* Sleek Gradient Overlay */}
+                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 via-gray-900/80 to-transparent p-8 pt-20">
+                   <p className="text-3xl font-bold text-white mb-1">Peter</p>
+                   <p className="text-green-500 font-bold uppercase tracking-widest text-sm">Executive Lead</p>
                  </div>
                </div>
-               
             </div>
           </div>
         </div>  

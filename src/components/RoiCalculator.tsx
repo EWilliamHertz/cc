@@ -32,7 +32,7 @@ const RoiCalculator = () => {
           <div className="space-y-4">
             <div className="flex justify-between items-end">
               <label className="text-xs font-bold text-gray-400 uppercase tracking-widest">Facility Size (Sq Ft)</label>
-              <span className="text-lg font-bold text-gray-900">{facilitySize.toLocaleString()}</span>
+              <span className="text-lg font-bold text-gray-900">{facilitySize.toLocaleString('en-US')}</span>
             </div>
             <input
               type="range"
@@ -48,7 +48,7 @@ const RoiCalculator = () => {
           <div className="space-y-4">
             <div className="flex justify-between items-end">
               <label className="text-xs font-bold text-gray-400 uppercase tracking-widest">Monthly Heating Bill ($)</label>
-              <span className="text-lg font-bold text-gray-900">${monthlyHeatingBill.toLocaleString()}</span>
+              <span className="text-lg font-bold text-gray-900">${monthlyHeatingBill.toLocaleString('en-US')}</span>
             </div>
             <input
               type="range"
@@ -62,9 +62,10 @@ const RoiCalculator = () => {
           </div>
 
           <div className="space-y-4">
+            
             <div className="flex justify-between items-end">
               <label className="text-xs font-bold text-gray-400 uppercase tracking-widest">Est. Installation Cost ($)</label>
-              <span className="text-lg font-bold text-gray-900">${installationCost.toLocaleString()}</span>
+              <span className="text-lg font-bold text-gray-900">${installationCost.toLocaleString('en-US')}</span>
             </div>
             <input
               type="range"
@@ -80,12 +81,13 @@ const RoiCalculator = () => {
 
         {/* Results Dashboard */}
         <div className="bg-gray-50 rounded-[2rem] p-8 border border-gray-100 space-y-6 flex flex-col justify-center">
+          
           <div className="bg-white p-6 rounded-2xl shadow-sm flex items-center justify-between border border-gray-100">
             <div className="flex items-center gap-3">
               <TrendingDown className="w-5 h-5 text-green-600" />
               <span className="font-bold text-gray-600">Annual Savings</span>
             </div>
-            <span className="text-2xl font-bold text-gray-900">${annualSavings.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
+            <span className="text-2xl font-bold text-gray-900">${annualSavings.toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
           </div>
 
           <div className="bg-white p-6 rounded-2xl shadow-sm flex items-center justify-between border border-gray-100">
